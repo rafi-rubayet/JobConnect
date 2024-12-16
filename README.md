@@ -68,7 +68,7 @@ Follow the steps below to run the project locally:
 
 ## Contact
 
-- **Author**: Rubayet Rafi  
-- **Email**: [your-email@example.com](mailto:rafi.rubayet.jp@gmail.com)  
+- **Author**: Rafi Rubayet
+- **Email**: [rafi.rubayet.jp@gmail.com](mailto:rafi.rubayet.jp@gmail.com)  
 
 Feel free to reach out for any questions or feedback!

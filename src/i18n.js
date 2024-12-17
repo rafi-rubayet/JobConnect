@@ -14,11 +14,14 @@ const messages = {
   ja,
 };
 
+// Retrieve saved locale from localStorage or use a default
+const savedLocale = localStorage.getItem('user-locale') || 'en';
+
 // Create the i18n instance
 export const i18n = createI18n({
   legacy: false, // Use Composition API mode
   globalInjection: true, // Enable global `t` function
-  locale: currentLocale.value, // Use the ref value as the initial locale
+  locale: savedLocale, // Use the ref value as the initial locale
   messages,
 });
 

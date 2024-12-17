@@ -25,15 +25,18 @@
       </button>
 
       <!-- Main Content Components -->
-      <Hero />
-      <HomeCards />
-      <JobListings :limit="3" :showButton="true" />
+      <!-- <Hero /> -->
+      <!-- <HomeCards /> -->
+      <!-- <JobListings :limit="3" :showButton="true" /> -->
+      <RouterView />
     </div>
   </div>
+  
 </template>
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
+import { RouterView } from 'vue-router';
 import Sidebar from "./components/Sidebar.vue";
 import Hero from "./components/Hero.vue";
 import HomeCards from "./components/HomeCards.vue";

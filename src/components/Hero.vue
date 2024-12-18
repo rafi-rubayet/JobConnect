@@ -1,5 +1,10 @@
 <script setup>
 import {defineProps} from 'vue';
+import { useI18n } from "vue-i18n";
+
+const { t, locale } = useI18n({ useScope: "global" });
+
+console.log({locale})
 
 defineProps({
   title: {
@@ -22,10 +27,10 @@ defineProps({
           <h1
             class="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl"
           >
-            {{ title }}
+            {{ t('label.home_title') }}
           </h1>
           <p class="my-4 text-xl text-white">
-            {{ subtitle }}
+            {{ t('label.home_sub_title') }}
           </p>
         </div>
       </div>

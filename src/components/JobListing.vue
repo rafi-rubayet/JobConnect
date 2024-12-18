@@ -1,23 +1,25 @@
 <script setup>
-import { defineProps, ref, computed } from "vue";
+import { RouterLink } from 'vue-router';
+import { defineProps, ref, computed } from 'vue';
+import { useI18n } from "vue-i18n";
+
+const { t, locale } = useI18n({ useScope: "global" });
 
 const props = defineProps({
   job: Object,
 });
 
-let showFullDesc = ref(false);
+const showFullDescription = ref(false);
 
-const toggleFullDesc = () => {
-  showFullDesc.value = !showFullDesc.value;
+const toggleFullDescription = () => {
+  showFullDescription.value = !showFullDescription.value;
 };
 
 const truncatedDescription = computed(() => {
   let description = props.job.description;
-
-  if (!showFullDesc.value) {
-    description = description.substring(0, 115) + "...";
+  if (!showFullDescription.value) {
+    description = description.substring(0, 90) + '...';
   }
-
   return description;
 });
 </script>
@@ -26,15 +28,20 @@ const truncatedDescription = computed(() => {
   <div class="bg-white rounded-xl shadow-md relative">
     <div class="p-4">
       <div class="mb-6">
-        <div class="text-gray-600 my-2">{{ job.type }}</div>
-        <h3 class="text-xl font-bold">{{ job.title }}</h3>
+        <div class="text-gray-600 my-2 line-clamp-1">{{ job.type }}</div>
+        <h3 class="text-xl font-bold line-clamp-1" :title="job.title">{{ job.title }}</h3>
       </div>
 
       <div class="mb-5">
-        <div>{{ truncatedDescription }}</div>
-        <button @click="toggleFullDesc" class="text-sky-500 hover:text-sky-600 mb-2">
-          {{ showFullDesc ? 'Less' : 'More' }}
-        </button>
+        <div class="line-clamp-3">
+          {{ truncatedDescription }}
+        </div>
+        <!-- <button
+          @click="toggleFullDescription"
+          class="text-sky-500 hover:text-sky-600 mb-5"
+        >
+          {{ showFullDescription ? 'Less' : 'More' }}
+        </button> -->
       </div>
 
       <h3 class="text-sky-500 mb-2">{{ job.salary }} / Year</h3>
@@ -46,12 +53,12 @@ const truncatedDescription = computed(() => {
           <i class="pi pi-map-marker text-orange-700"></i>
           {{ job.location }}
         </div>
-        <a
-          :href="'/job/' + job.id"
+        <RouterLink
+          :to="'/jobs/' + job.id"
           class="h-[36px] bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-lg text-center text-sm"
         >
-          Read More
-        </a>
+          {{ t('button.read_more') }}
+        </RouterLink>
       </div>
     </div>
   </div>

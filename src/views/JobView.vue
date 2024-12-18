@@ -4,7 +4,9 @@ import BackButton from '@/components/BackButton.vue';
 import { reactive, onMounted } from 'vue';
 import { useRoute, RouterLink, useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification';
-import axios from 'axios';
+import axios from 'axios';import { useI18n } from "vue-i18n";
+
+const { t, locale } = useI18n({ useScope: "global" });
 
 const route = useRoute();
 const router = useRouter();
@@ -64,16 +66,16 @@ onMounted(async () => {
 
           <div class="bg-white p-6 rounded-lg shadow-md mt-6">
             <h3 class="text-sky-800 text-lg font-bold mb-6">
-              Job Description
+              {{ t('label.job_description') }}
             </h3>
 
             <p class="mb-4">
               {{ state.job.description }}
             </p>
 
-            <h3 class="text-sky-800 text-lg font-bold mb-2">Salary</h3>
+            <h3 class="text-sky-800 text-lg font-bold mb-2">{{ t('label.salary') }}</h3>
 
-            <p class="mb-4">{{ state.job.salary }} / Year</p>
+            <p class="mb-4">{{ state.job.salary }} / {{ t('label.year') }}</p>
           </div>
         </main>
 
@@ -81,7 +83,7 @@ onMounted(async () => {
         <aside>
           <!-- Company Info -->
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-bold mb-6">Company Info</h3>
+            <h3 class="text-xl font-bold mb-6">{{ t('label.company_info') }}</h3>
 
             <h2 class="text-2xl">{{ state.job.company.name }}</h2>
 
@@ -91,13 +93,13 @@ onMounted(async () => {
 
             <hr class="my-4" />
 
-            <h3 class="text-xl">Contact Email:</h3>
+            <h3 class="text-xl">{{ t('label.contact_email') }}:</h3>
 
             <p class="my-2 bg-sky-100 p-2 font-bold break-words whitespace-normal">
               {{ state.job.company.contactEmail }}
             </p>
 
-            <h3 class="text-xl">Contact Phone:</h3>
+            <h3 class="text-xl">{{ t('label.contact_phone') }}:</h3>
 
             <p class="my-2 bg-sky-100 p-2 font-bold">
               {{ state.job.company.contactPhone }}
@@ -106,17 +108,17 @@ onMounted(async () => {
 
           <!-- Manage -->
           <div class="bg-white p-6 rounded-lg shadow-md mt-6">
-            <h3 class="text-xl font-bold mb-6">Manage Job</h3>
+            <h3 class="text-xl font-bold mb-6">{{ t('label.manage_job') }}</h3>
             <RouterLink
               :to="`/jobs/edit/${state.job.id}`"
               class="bg-sky-500 hover:bg-sky-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
-              >Edit Job</RouterLink
+              >{{ t('button.edit_job') }}</RouterLink
             >
             <button
               @click="deleteJob"
               class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
             >
-              Delete Job
+              {{ t('button.delete_job') }}
             </button>
           </div>
         </aside>

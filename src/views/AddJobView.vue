@@ -3,6 +3,9 @@ import router from '@/router';
 import { reactive } from 'vue';
 import { useToast } from 'vue-toastification';
 import axios from 'axios';
+import { useI18n } from "vue-i18n";
+
+const { t, locale } = useI18n({ useScope: "global" });
 
 const form = reactive({
   type: 'Full-Time',
@@ -53,11 +56,11 @@ const handleSubmit = async () => {
         class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
       >
         <form @submit.prevent="handleSubmit">
-          <h2 class="text-3xl text-center font-semibold mb-6">Add Job</h2>
+          <h2 class="text-3xl text-center font-semibold mb-6">{{ t('addJob') }}</h2>
 
           <div class="mb-4">
             <label for="type" class="block text-gray-700 font-bold mb-2"
-              >Job Type</label
+              >{{ t('label.jobType') }}</label
             >
             <select
               v-model="form.type"
@@ -75,7 +78,7 @@ const handleSubmit = async () => {
 
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2"
-              >Job Listing Name</label
+              >{{ t('label.jobListingName') }}</label
             >
             <input
               type="text"
@@ -83,13 +86,13 @@ const handleSubmit = async () => {
               id="name"
               name="name"
               class="border rounded w-full py-2 px-3 mb-2"
-              placeholder="eg. Beautiful Apartment In Miami"
+              :placeholder="t('placeholder.jobListingName')"
               required
             />
           </div>
           <div class="mb-4">
             <label for="description" class="block text-gray-700 font-bold mb-2"
-              >Description</label
+              >{{ t('label.description') }}</label
             >
             <textarea
               id="description"
@@ -97,13 +100,13 @@ const handleSubmit = async () => {
               name="description"
               class="border rounded w-full py-2 px-3"
               rows="4"
-              placeholder="Add any job duties, expectations, requirements, etc"
+              :placeholder="t('placeholder.description')"
             ></textarea>
           </div>
 
           <div class="mb-4">
             <label for="type" class="block text-gray-700 font-bold mb-2"
-              >Salary</label
+              >{{ t('label.salary') }}</label
             >
             <select
               id="salary"
@@ -112,38 +115,38 @@ const handleSubmit = async () => {
               class="border rounded w-full py-2 px-3"
               required
             >
-              <option value="Under $50K">under $50K</option>
-              <option value="$50K - $60K">$50 - $60K</option>
-              <option value="$60K - $70K">$60 - $70K</option>
-              <option value="$70K - $80K">$70 - $80K</option>
-              <option value="$80K - $90K">$80 - $90K</option>
-              <option value="$90K - $100K">$90 - $100K</option>
-              <option value="$100K - $125K">$100 - $125K</option>
-              <option value="$125K - $150K">$125 - $150K</option>
-              <option value="$150K - $175K">$150 - $175K</option>
-              <option value="$175K - $200K">$175 - $200K</option>
-              <option value="Over $200K">Over $200K</option>
+              <option value="Under ￥5M">under ￥5M</option>
+              <option value="￥5M - ￥6M">￥50 - ￥6M</option>
+              <option value="￥6M - ￥7M">￥60 - ￥7M</option>
+              <option value="￥7M - ￥8M">￥70 - ￥8M</option>
+              <option value="￥8M - ￥9M">￥80 - ￥9M</option>
+              <option value="￥9M - ￥10M">￥90 - ￥10M</option>
+              <option value="￥10M - ￥12M">￥10M - ￥12M</option>
+              <option value="￥125K - ￥15M">￥12M - ￥15M</option>
+              <option value="￥15M - ￥17M">￥15M - ￥17M</option>
+              <option value="￥175K - ￥20M">￥17M - ￥20M</option>
+              <option value="Over ￥20M">Over ￥20M</option>
             </select>
           </div>
 
           <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2"> Location </label>
+            <label class="block text-gray-700 font-bold mb-2"> {{ t('label.location') }} </label>
             <input
               type="text"
               v-model="form.location"
               id="location"
               name="location"
               class="border rounded w-full py-2 px-3 mb-2"
-              placeholder="Company Location"
+              :placeholder="t('label.location')"
               required
             />
           </div>
 
-          <h3 class="text-2xl mb-5">Company Info</h3>
+          <h3 class="text-2xl mb-5">{{ t('label.companyInfo') }}</h3>
 
           <div class="mb-4">
             <label for="company" class="block text-gray-700 font-bold mb-2"
-              >Company Name</label
+              >{{ t('label.companyName') }}</label
             >
             <input
               type="text"
@@ -151,7 +154,7 @@ const handleSubmit = async () => {
               id="company"
               name="company"
               class="border rounded w-full py-2 px-3"
-              placeholder="Company Name"
+              ::placeholder="t(':placeholder.companyName')"
             />
           </div>
 
@@ -159,7 +162,7 @@ const handleSubmit = async () => {
             <label
               for="company_description"
               class="block text-gray-700 font-bold mb-2"
-              >Company Description</label
+              >{{ t('label.companyDescription') }}</label
             >
             <textarea
               id="company_description"
@@ -167,7 +170,7 @@ const handleSubmit = async () => {
               name="company_description"
               class="border rounded w-full py-2 px-3"
               rows="4"
-              placeholder="What does your company do?"
+              :placeholder="t('label.companyDescription')"
             ></textarea>
           </div>
 
@@ -175,7 +178,7 @@ const handleSubmit = async () => {
             <label
               for="contact_email"
               class="block text-gray-700 font-bold mb-2"
-              >Contact Email</label
+              >{{ t('label.contactEmail') }}</label
             >
             <input
               type="email"
@@ -183,7 +186,7 @@ const handleSubmit = async () => {
               id="contact_email"
               name="contact_email"
               class="border rounded w-full py-2 px-3"
-              placeholder="Email address for applicants"
+              :placeholder="t('label.contactEmail')"
               required
             />
           </div>
@@ -191,7 +194,7 @@ const handleSubmit = async () => {
             <label
               for="contact_phone"
               class="block text-gray-700 font-bold mb-2"
-              >Contact Phone</label
+              >{{ t('label.contactPhone') }}</label
             >
             <input
               type="tel"
@@ -199,7 +202,7 @@ const handleSubmit = async () => {
               id="contact_phone"
               name="contact_phone"
               class="border rounded w-full py-2 px-3"
-              placeholder="Optional phone for applicants"
+              :placeholder="t('placeholder.contactPhone')"
             />
           </div>
 
@@ -208,7 +211,7 @@ const handleSubmit = async () => {
               class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              Add Job
+            {{ t('addJob') }}
             </button>
           </div>
         </form>
